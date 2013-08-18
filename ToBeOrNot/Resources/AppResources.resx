@@ -140,4 +140,34 @@
   <data name="DecidedIssuesTitle" xml:space="preserve">
     <value>decided</value>
   </data>
+  <data name="AboutTitle" xml:space="preserve">
+    <value>about</value>
+  </data>
+  <data name="PublisherName" xml:space="preserve">
+    <value>by Volodymyr Lysiuk</value>
+  </data>
+  <data name="AppVersionText" xml:space="preserve">
+    <value>Version: </value>
+  </data>
+  <data name="EmailText" xml:space="preserve">
+    <value>write an email</value>
+  </data>
+  <data name="FeedbackDescriptionText" xml:space="preserve">
+    <value>Feel free to drop me an email for any feedback or suggestion you might have:</value>
+  </data>
+  <data name="RateAndReviewText" xml:space="preserve">
+    <value>rate and review</value>
+  </data>
+  <data name="ReviewDescriptionText" xml:space="preserve">
+    <value>Rate this app and share your comments: </value>
+  </data>
+  <data name="FeaturesText" xml:space="preserve">
+    <value>To Be Or Not is a small app which helps you to evaluate all pros and cons of any issue or question you have so that you can make a decision based on those values.</value>
+  </data>
+  <data name="FeaturesTitle" xml:space="preserve">
+    <value>features</value>
+  </data>
+  <data name="WhatIsNewTitle" xml:space="preserve">
+    <value>what's new</value>
+  </data>
 </root>

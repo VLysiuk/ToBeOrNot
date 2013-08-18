@@ -7,14 +7,12 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using ToBeOrNot.Resources;
 
-namespace ToBeOrNot
+namespace ToBeOrNot.Views
 {
-    public partial class MainPage : PhoneApplicationPage
+    public partial class AboutPage : PhoneApplicationPage
     {
-        // Constructor
-        public MainPage()
+        public AboutPage()
         {
             InitializeComponent();
         }

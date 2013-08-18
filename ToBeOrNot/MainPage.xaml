@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:bar="clr-namespace:BindableApplicationBar;assembly=BindableApplicationBar"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -21,7 +22,7 @@
             <!--Pivot item one-->
             <phone:PivotItem Header="{Binding Path=LocalizedResources.CurrentIssuesTitle, Source={StaticResource LocalizedStrings}}">
                 <!--Double line list with text wrapping-->
-                <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding Items}">
+                <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding Items}" >
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Margin="0,0,0,17">
@@ -50,18 +51,21 @@
         </phone:Pivot>
      </Grid>
     
-     <phone:PhoneApplicationPage.ApplicationBar>
-            <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+    <bar:Bindable.ApplicationBar>
+        <bar:BindableApplicationBar IsEnabled="True" IsVisible="True"
+                                    IsMenuEnabled="True" IsMenuVisible="True">
+           
+           <bar:BindableApplicationBarButton
+            Text="{Binding Path=LocalizedResources.AppBarButtonText, Source={StaticResource LocalizedStrings}}"
+            IconUri="/Assets/appbar.add.rest.png" 
+            x:Name="NewTaskAppBarButton"/>
 
-                <shell:ApplicationBarIconButton 
-                IconUri="/Assets/appbar.add.rest.png" 
-                Text="add" 
-                x:Name="NewTaskAppBarButton" 
-                />
-                <shell:ApplicationBar.MenuItems>
-                    <shell:ApplicationBarMenuItem Text="about" />
-                </shell:ApplicationBar.MenuItems>
-            </shell:ApplicationBar>
-     </phone:PhoneApplicationPage.ApplicationBar>
+            <bar:BindableApplicationBar.MenuItems>
+                <bar:BindableApplicationBarMenuItem
+                Text="{Binding Path=LocalizedResources.AboutTitle, Source={StaticResource LocalizedStrings}}"
+                Command="{Binding OpenAboutCommand}" />
+            </bar:BindableApplicationBar.MenuItems>
+        </bar:BindableApplicationBar>
+    </bar:Bindable.ApplicationBar>
 
 </phone:PhoneApplicationPage>

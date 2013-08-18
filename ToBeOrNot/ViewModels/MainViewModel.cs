@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Input;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 
 namespace ToBeOrNot.ViewModels
 {
@@ -11,9 +9,21 @@ namespace ToBeOrNot.ViewModels
     {
         private readonly INavigationService _navigationService;
 
-        public MainViewModel(INavigationService _navigationService)
+        private RelayCommand _openAboutCommand;
+        
+        public MainViewModel(INavigationService navigationService)
         {
-            this._navigationService = _navigationService;
+            _navigationService = navigationService;
+        }
+
+        public ICommand OpenAboutCommand
+        {
+            get { return _openAboutCommand ?? (_openAboutCommand = new RelayCommand(OpenAboutPage)); }
+        }
+
+        private void OpenAboutPage()
+        {
+            _navigationService.Navigate(new Uri("/Views/AboutPage.xaml", UriKind.Relative));
         }
     }
 }

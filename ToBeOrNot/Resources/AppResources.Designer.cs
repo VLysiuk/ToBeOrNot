@@ -61,6 +61,15 @@ namespace ToBeOrNot.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to about.
+        /// </summary>
+        public static string AboutTitle {
+            get {
+                return ResourceManager.GetString("AboutTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to add.
         /// </summary>
         public static string AppBarButtonText {
@@ -88,6 +97,15 @@ namespace ToBeOrNot.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Version: .
+        /// </summary>
+        public static string AppVersionText {
+            get {
+                return ResourceManager.GetString("AppVersionText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to current.
         /// </summary>
         public static string CurrentIssuesTitle {
@@ -106,6 +124,60 @@ namespace ToBeOrNot.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to write an email.
+        /// </summary>
+        public static string EmailText {
+            get {
+                return ResourceManager.GetString("EmailText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To Be Or Not is a small app which helps you to evaluate all pros and cons of any issue or question you have so that you can make a decision based on those values..
+        /// </summary>
+        public static string FeaturesText {
+            get {
+                return ResourceManager.GetString("FeaturesText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to features.
+        /// </summary>
+        public static string FeaturesTitle {
+            get {
+                return ResourceManager.GetString("FeaturesTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Feel free to drop me an email for any feedback or suggestion you might have:.
+        /// </summary>
+        public static string FeedbackDescriptionText {
+            get {
+                return ResourceManager.GetString("FeedbackDescriptionText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to by Volodymyr Lysiuk.
+        /// </summary>
+        public static string PublisherName {
+            get {
+                return ResourceManager.GetString("PublisherName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to rate and review.
+        /// </summary>
+        public static string RateAndReviewText {
+            get {
+                return ResourceManager.GetString("RateAndReviewText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LeftToRight.
         /// </summary>
         public static string ResourceFlowDirection {
@@ -120,6 +192,24 @@ namespace ToBeOrNot.Resources {
         public static string ResourceLanguage {
             get {
                 return ResourceManager.GetString("ResourceLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rate this app and share your comments: .
+        /// </summary>
+        public static string ReviewDescriptionText {
+            get {
+                return ResourceManager.GetString("ReviewDescriptionText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to what&apos;s new.
+        /// </summary>
+        public static string WhatIsNewTitle {
+            get {
+                return ResourceManager.GetString("WhatIsNewTitle", resourceCulture);
             }
         }
     }
