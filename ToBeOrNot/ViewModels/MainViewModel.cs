@@ -10,6 +10,7 @@ namespace ToBeOrNot.ViewModels
         private readonly INavigationService _navigationService;
 
         private RelayCommand _openAboutCommand;
+        private RelayCommand _addNewIssueCommand;
         
         public MainViewModel(INavigationService navigationService)
         {
@@ -21,9 +22,19 @@ namespace ToBeOrNot.ViewModels
             get { return _openAboutCommand ?? (_openAboutCommand = new RelayCommand(OpenAboutPage)); }
         }
 
+        public ICommand AddNewIssueCommand
+        {
+            get { return _addNewIssueCommand ?? (_addNewIssueCommand = new RelayCommand(AddNewIssue)); }
+        }
+
         private void OpenAboutPage()
         {
             _navigationService.Navigate(new Uri("/Views/AboutPage.xaml", UriKind.Relative));
+        }
+
+        private void AddNewIssue()
+        {
+            _navigationService.Navigate(new Uri("/Views/NewIssuePage.xaml", UriKind.Relative));
         }
     }
 }

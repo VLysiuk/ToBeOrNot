@@ -22,5 +22,16 @@ namespace ToBeOrNot.Test
 
             navigationService.Received().Navigate(Arg.Is<Uri>(u => u.OriginalString.Contains("AboutPage.xaml")));
         }
+
+        [Test]
+        public void AddNewIssueCommandShouldNavigateToNewIssuePage()
+        {
+            var navigationService = Substitute.For<INavigationService>();
+            var mainVieModel = new MainViewModel(navigationService);
+
+            mainVieModel.AddNewIssueCommand.Execute(null);
+
+            navigationService.Received().Navigate(Arg.Is<Uri>(u => u.OriginalString.Contains("NewIssuePage.xaml")));
+        }
     }
 }

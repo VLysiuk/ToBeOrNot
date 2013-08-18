@@ -55,15 +55,14 @@
         <bar:BindableApplicationBar IsEnabled="True" IsVisible="True"
                                     IsMenuEnabled="True" IsMenuVisible="True">
            
-           <bar:BindableApplicationBarButton
-            Text="{Binding Path=LocalizedResources.AppBarButtonText, Source={StaticResource LocalizedStrings}}"
-            IconUri="/Assets/appbar.add.rest.png" 
-            x:Name="NewTaskAppBarButton"/>
+           <bar:BindableApplicationBarButton Text="{Binding Path=LocalizedResources.AppBarButtonText, Source={StaticResource LocalizedStrings}}"
+                                             IconUri="/Assets/appbar.add.rest.png" 
+                                             Command="{Binding AddNewIssueCommand}"
+                                             x:Name="NewTaskAppBarButton"/>
 
             <bar:BindableApplicationBar.MenuItems>
-                <bar:BindableApplicationBarMenuItem
-                Text="{Binding Path=LocalizedResources.AboutTitle, Source={StaticResource LocalizedStrings}}"
-                Command="{Binding OpenAboutCommand}" />
+                <bar:BindableApplicationBarMenuItem Text="{Binding Path=LocalizedResources.AboutTitle, Source={StaticResource LocalizedStrings}}"
+                                                    Command="{Binding OpenAboutCommand}" />
             </bar:BindableApplicationBar.MenuItems>
         </bar:BindableApplicationBar>
     </bar:Bindable.ApplicationBar>

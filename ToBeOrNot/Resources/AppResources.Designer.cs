@@ -106,6 +106,24 @@ namespace ToBeOrNot.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to cancel.
+        /// </summary>
+        public static string CancelAppBarButtonText {
+            get {
+                return ResourceManager.GetString("CancelAppBarButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to create.
+        /// </summary>
+        public static string CreateAppBarButtonText {
+            get {
+                return ResourceManager.GetString("CreateAppBarButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to current.
         /// </summary>
         public static string CurrentIssuesTitle {
@@ -160,6 +178,24 @@ namespace ToBeOrNot.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to photo.
+        /// </summary>
+        public static string MakePhotoAppBarButtonText {
+            get {
+                return ResourceManager.GetString("MakePhotoAppBarButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to new issue.
+        /// </summary>
+        public static string NewIssueTitle {
+            get {
+                return ResourceManager.GetString("NewIssueTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to by Volodymyr Lysiuk.
         /// </summary>
         public static string PublisherName {
@@ -201,6 +237,24 @@ namespace ToBeOrNot.Resources {
         public static string ReviewDescriptionText {
             get {
                 return ResourceManager.GetString("ReviewDescriptionText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to select a picture.
+        /// </summary>
+        public static string SelectPictureText {
+            get {
+                return ResourceManager.GetString("SelectPictureText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Subject.
+        /// </summary>
+        public static string SubjectText {
+            get {
+                return ResourceManager.GetString("SubjectText", resourceCulture);
             }
         }
         

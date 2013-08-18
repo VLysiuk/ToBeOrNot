@@ -161,11 +161,29 @@
   <data name="ReviewDescriptionText" xml:space="preserve">
     <value>Rate this app and share your comments: </value>
   </data>
+  <data name="CancelAppBarButtonText" xml:space="preserve">
+    <value>cancel</value>
+  </data>
+  <data name="CreateAppBarButtonText" xml:space="preserve">
+    <value>create</value>
+  </data>
   <data name="FeaturesText" xml:space="preserve">
     <value>To Be Or Not is a small app which helps you to evaluate all pros and cons of any issue or question you have so that you can make a decision based on those values.</value>
   </data>
   <data name="FeaturesTitle" xml:space="preserve">
     <value>features</value>
+  </data>
+  <data name="MakePhotoAppBarButtonText" xml:space="preserve">
+    <value>photo</value>
+  </data>
+  <data name="NewIssueTitle" xml:space="preserve">
+    <value>new issue</value>
+  </data>
+  <data name="SelectPictureText" xml:space="preserve">
+    <value>select a picture</value>
+  </data>
+  <data name="SubjectText" xml:space="preserve">
+    <value>Subject</value>
   </data>
   <data name="WhatIsNewTitle" xml:space="preserve">
     <value>what's new</value>

@@ -15,12 +15,14 @@ namespace ToBeOrNot.ViewModels
     public class AboutViewModel : ViewModelBase
     {
         private readonly IAppSettingsProvider _appSettingsProvider;
+        private readonly ISpecialTasksProvider _specialTasksProvider;
         private RelayCommand _rateAndReviewCommand;
         private RelayCommand _writeAnEmailCommand;
 
-        public AboutViewModel(IAppSettingsProvider appSettingsProvider)
+        public AboutViewModel(IAppSettingsProvider appSettingsProvider, ISpecialTasksProvider specialTasksProvider)
         {
             _appSettingsProvider = appSettingsProvider;
+            _specialTasksProvider = specialTasksProvider;
         }
 
         public string Version
@@ -38,17 +40,14 @@ namespace ToBeOrNot.ViewModels
             get { return _writeAnEmailCommand ?? (_writeAnEmailCommand = new RelayCommand(WriteAnEmail)); }
         }
 
-        private static void RateAndReview()
+        private void RateAndReview()
         {
-            var task = new MarketplaceReviewTask();
-            task.Show();
+            _specialTasksProvider.RateAndReview();
         }
 
         private void WriteAnEmail()
         {
-            var task = new EmailComposeTask();
-            task.To = _appSettingsProvider.GetAuthorEmail();
-            task.Show();
+            _specialTasksProvider.ComposeEmail(_appSettingsProvider.GetAuthorEmail());
         }
     }
 }

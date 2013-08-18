@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="AboutViewModelTests.cs" />
     <Compile Include="MainViewModelTests.cs" />
+    <Compile Include="NewIssueViewModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
