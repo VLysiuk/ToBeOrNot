@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using ToBeOrNot.Model;
+using ToBeOrNot.Model.Data;
 
 namespace ToBeOrNot.ViewModels
 {
@@ -12,6 +13,7 @@ namespace ToBeOrNot.ViewModels
             SimpleIoc.Default.Register<INavigationService>(() => new NavigationService());
             SimpleIoc.Default.Register<IAppSettingsProvider>(() => new AppSettingsProvider());
             SimpleIoc.Default.Register<ISpecialTasksProvider>(() => new PhoneSpecialTasksProvider());
+            SimpleIoc.Default.Register<IDataProvider>(() => (App.Current as App).DataProvider);
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<AboutViewModel>();
             SimpleIoc.Default.Register<NewIssueViewModel>();

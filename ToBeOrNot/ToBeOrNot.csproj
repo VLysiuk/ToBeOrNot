@@ -99,8 +99,15 @@
     </Compile>
     <Compile Include="Misc\SelectedPictureEventArgs.cs" />
     <Compile Include="Model\AppSettingsProvider.cs" />
+    <Compile Include="Model\Data\DataItem.cs" />
+    <Compile Include="Model\Data\IDataProvider.cs" />
+    <Compile Include="Model\Data\IdentityTrigger.cs" />
+    <Compile Include="Model\Data\IssuesDatabase.cs" />
+    <Compile Include="Model\Data\SterlingDataProvider.cs" />
+    <Compile Include="Model\EvaluationItem.cs" />
     <Compile Include="Model\IAppSettingsProvider.cs" />
     <Compile Include="Model\ISpecialTasksProvider.cs" />
+    <Compile Include="Model\Issue.cs" />
     <Compile Include="Model\PhoneSpecialTasksProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\AppResources.Designer.cs">
@@ -199,6 +206,12 @@
     </Reference>
     <Reference Include="System.Windows.Interactivity, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.4.1.27.0\lib\WindowsPhone8\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="Wintellect.Sterling.WindowsPhone">
+      <HintPath>..\packages\SterlingPhone.1.6.2\lib\sl3-wp\Wintellect.Sterling.WindowsPhone.dll</HintPath>
+    </Reference>
+    <Reference Include="Wintellect.Sterling.WindowsPhone.IsolatedStorage">
+      <HintPath>..\packages\SterlingPhone.1.6.2\lib\sl3-wp\Wintellect.Sterling.WindowsPhone.IsolatedStorage.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup />

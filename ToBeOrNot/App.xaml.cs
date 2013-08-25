@@ -6,6 +6,7 @@ using System.Windows.Markup;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using ToBeOrNot.Model.Data;
 using ToBeOrNot.Resources;
 
 namespace ToBeOrNot
@@ -18,11 +19,15 @@ namespace ToBeOrNot
         /// <returns>The root frame of the Phone Application.</returns>
         public static PhoneApplicationFrame RootFrame { get; private set; }
 
+        public IDataProvider DataProvider { get; private set; }
+
         /// <summary>
         /// Constructor for the Application object.
         /// </summary>
         public App()
         {
+            DataProvider = new SterlingDataProvider();
+
             // Global handler for uncaught exceptions.
             UnhandledException += Application_UnhandledException;
 
@@ -54,31 +59,34 @@ namespace ToBeOrNot
                 // and consume battery power when the user is not using the phone.
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
-
         }
 
         // Code to execute when the application is launching (eg, from Start)
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            DataProvider.SetupDatabase();
         }
 
         // Code to execute when the application is activated (brought to foreground)
         // This code will not execute when the application is first launched
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
+            DataProvider.SetupDatabase();
         }
 
         // Code to execute when the application is deactivated (sent to background)
         // This code will not execute when the application is closing
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
+            DataProvider.CleanUpDatabase();
         }
 
         // Code to execute when the application is closing (eg, user hit Back)
         // This code will not execute when the application is deactivated
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
+            DataProvider.CleanUpDatabase();
         }
 
         // Code to execute if a navigation fails

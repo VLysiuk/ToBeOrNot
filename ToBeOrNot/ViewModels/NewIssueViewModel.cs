@@ -8,19 +8,22 @@ using System.Windows.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using ToBeOrNot.Model;
+using ToBeOrNot.Model.Data;
 
 namespace ToBeOrNot.ViewModels
 {
     public class NewIssueViewModel : ViewModelBase
     {
         private readonly ISpecialTasksProvider _specialTasksProvider;
+        private readonly IDataProvider _dataProvider;
         private RelayCommand _selectPictureCommand;
         private RelayCommand _takePhotoCommand;
         private BitmapImage _selectedImage;
 
-        public NewIssueViewModel(ISpecialTasksProvider specialTasksProvider)
+        public NewIssueViewModel(ISpecialTasksProvider specialTasksProvider, IDataProvider dataProvider)
         {
             _specialTasksProvider = specialTasksProvider;
+            _dataProvider = dataProvider;
             _specialTasksProvider.PictureSelected += (s, args) => { SelectedImage = args.SelectedPicture; };
         }
 

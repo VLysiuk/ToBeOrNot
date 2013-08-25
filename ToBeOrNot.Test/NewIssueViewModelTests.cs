@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using NSubstitute;
 using NUnit.Framework;
 using ToBeOrNot.Model;
+using ToBeOrNot.Model.Data;
 using ToBeOrNot.ViewModels;
 
 namespace ToBeOrNot.Test
@@ -17,7 +18,8 @@ namespace ToBeOrNot.Test
         public void ShouldPerformPhotoChooserTask()
         {
             var tasksProvider = Substitute.For<ISpecialTasksProvider>();
-            var newIssueViewModel = new NewIssueViewModel(tasksProvider);
+            var dataProvider = Substitute.For<IDataProvider>();
+            var newIssueViewModel = new NewIssueViewModel(tasksProvider, dataProvider);
             
             newIssueViewModel.SelectPictureCommand.Execute(null);
 
@@ -28,7 +30,8 @@ namespace ToBeOrNot.Test
         public void ShouldPerformTakePhotoTask()
         {
             var tasksProvider = Substitute.For<ISpecialTasksProvider>();
-            var newIssueViewModel = new NewIssueViewModel(tasksProvider);
+            var dataProvider = Substitute.For<IDataProvider>();
+            var newIssueViewModel = new NewIssueViewModel(tasksProvider, dataProvider);
 
             newIssueViewModel.TakePhotoCommand.Execute(null);
 
