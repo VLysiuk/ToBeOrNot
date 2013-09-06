@@ -133,11 +133,29 @@ namespace ToBeOrNot.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to decide.
+        /// </summary>
+        public static string DecideAppBarButtonText {
+            get {
+                return ResourceManager.GetString("DecideAppBarButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to decided.
         /// </summary>
         public static string DecidedIssuesTitle {
             get {
                 return ResourceManager.GetString("DecidedIssuesTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to decide later.
+        /// </summary>
+        public static string DecideLaterAppBarButtonText {
+            get {
+                return ResourceManager.GetString("DecideLaterAppBarButtonText", resourceCulture);
             }
         }
         

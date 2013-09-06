@@ -188,4 +188,10 @@
   <data name="WhatIsNewTitle" xml:space="preserve">
     <value>what's new</value>
   </data>
+  <data name="DecideAppBarButtonText" xml:space="preserve">
+    <value>decide</value>
+  </data>
+  <data name="DecideLaterAppBarButtonText" xml:space="preserve">
+    <value>decide later</value>
+  </data>
 </root>

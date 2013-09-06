@@ -1,0 +1,90 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="ToBeOrNot.Views.ProsAndConsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:bar="clr-namespace:BindableApplicationBar;assembly=BindableApplicationBar"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    DataContext="{Binding Source={StaticResource Locator}, Path=ProsAndCons}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="{Binding Subject}" Margin="9,10,0,0" 
+                       Style="{StaticResource PhoneTextTitle2Style}"
+                       TextWrapping="Wrap"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <TextBlock Text="Pros" HorizontalAlignment="Center"/>
+            <TextBlock Text="Cons" Grid.Column="1" HorizontalAlignment="Center"/>
+            
+            <ListBox Grid.Column="0" Grid.Row="1" ItemsSource="{Binding ProsItems}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image/>
+                            <TextBlock Text="{Binding Name}" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            
+            <ListBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding ConsItems}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image/>
+                            <TextBlock Text="{Binding Name}" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </Grid>
+    <bar:Bindable.ApplicationBar>
+        <bar:BindableApplicationBar IsEnabled="True" IsVisible="True"
+                                    IsMenuEnabled="True" IsMenuVisible="True">
+            <bar:BindableApplicationBarButton Text="{Binding Path=LocalizedResources.AppBarButtonText, Source={StaticResource LocalizedStrings}}"
+                                             IconUri="/Assets/appbar.add.rest.png" 
+                                             Command="{Binding AddEvaluationCommand}"
+                                             x:Name="NewTaskAppBarButton"/>
+            
+            <bar:BindableApplicationBarButton Text="{Binding Path=LocalizedResources.DecideAppBarButtonText, Source={StaticResource LocalizedStrings}}"
+                                              IconUri="/Assets/appbar.check.rest.png" 
+                                              x:Name="CreateNewAppBarButton"
+                                              Command="{Binding DecideIssueCommand}"/>
+
+            <bar:BindableApplicationBarButton Text="{Binding Path=LocalizedResources.CancelAppBarButtonText, Source={StaticResource LocalizedStrings}}"
+                                              IconUri="/Assets/appbar.cancel.rest.png" 
+                                              x:Name="CancelAppBarButton"
+                                              Command="{Binding DecideLaterIssueCommand}"/>
+        </bar:BindableApplicationBar>
+    </bar:Bindable.ApplicationBar>
+</phone:PhoneApplicationPage>

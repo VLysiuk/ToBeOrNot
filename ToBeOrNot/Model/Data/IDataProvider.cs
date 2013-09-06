@@ -9,6 +9,9 @@ namespace ToBeOrNot.Model.Data
     public interface IDataProvider
     {
         void SetupDatabase();
+
         void CleanUpDatabase();
+
+        void Save(Issue issue);
     }
 }

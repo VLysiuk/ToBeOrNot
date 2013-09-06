@@ -36,5 +36,11 @@ namespace ToBeOrNot.Model.Data
             _database = null;
             _engine = null;
         }
+
+        public void Save(Issue issue)
+        {
+            _database.Save(issue);
+            _database.Flush();
+        }
     }
 }

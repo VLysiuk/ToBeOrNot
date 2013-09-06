@@ -40,7 +40,7 @@
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0">
                 <TextBlock Text="{Binding Path=LocalizedResources.SubjectText, Source={StaticResource LocalizedStrings}}"/>
-                <TextBox x:Name="issueSubjectTextBox"/>
+                <TextBox Text="{Binding Subject}" x:Name="issueSubjectTextBox"/>
             </StackPanel>
             <Image Grid.Row="1" Source="{Binding SelectedImage}"
                    Margin="15"/>
@@ -62,11 +62,13 @@
             
             <bar:BindableApplicationBarButton Text="{Binding Path=LocalizedResources.CreateAppBarButtonText, Source={StaticResource LocalizedStrings}}"
                                               IconUri="/Assets/appbar.check.rest.png" 
-                                              x:Name="CreateNewAppBarButton"/>
+                                              x:Name="CreateNewAppBarButton"
+                                              Command="{Binding SaveIssueCommand}"/>
 
             <bar:BindableApplicationBarButton Text="{Binding Path=LocalizedResources.CancelAppBarButtonText, Source={StaticResource LocalizedStrings}}"
                                               IconUri="/Assets/appbar.cancel.rest.png" 
-                                              x:Name="CancelAppBarButton"/>
+                                              x:Name="CancelAppBarButton"
+                                              Command="{Binding CancelIssueCommand}"/>
         </bar:BindableApplicationBar>
     </bar:Bindable.ApplicationBar>
 </phone:PhoneApplicationPage>

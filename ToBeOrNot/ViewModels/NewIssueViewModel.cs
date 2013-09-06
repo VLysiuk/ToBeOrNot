@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using ToBeOrNot.Model;
 using ToBeOrNot.Model.Data;
+using ToBeOrNot.Views;
 
 namespace ToBeOrNot.ViewModels
 {
@@ -16,15 +13,34 @@ namespace ToBeOrNot.ViewModels
     {
         private readonly ISpecialTasksProvider _specialTasksProvider;
         private readonly IDataProvider _dataProvider;
+        private readonly INavigationService _navigationService;
         private RelayCommand _selectPictureCommand;
         private RelayCommand _takePhotoCommand;
+        private RelayCommand _saveIssueCommand;
+        private RelayCommand _cancelIssueCommand;
+        private string _subject;
         private BitmapImage _selectedImage;
 
-        public NewIssueViewModel(ISpecialTasksProvider specialTasksProvider, IDataProvider dataProvider)
+        public NewIssueViewModel(ISpecialTasksProvider specialTasksProvider, IDataProvider dataProvider, INavigationService navigationService)
         {
             _specialTasksProvider = specialTasksProvider;
             _dataProvider = dataProvider;
+            _navigationService = navigationService;
             _specialTasksProvider.PictureSelected += (s, args) => { SelectedImage = args.SelectedPicture; };
+        }
+
+        public string Subject
+        {
+            get
+            {
+                return _subject;
+            }
+
+            set
+            {
+                _subject = value;
+                RaisePropertyChanged(() => Subject);
+            }
         }
 
         public BitmapImage SelectedImage
@@ -51,6 +67,16 @@ namespace ToBeOrNot.ViewModels
             get { return _takePhotoCommand ?? (_takePhotoCommand = new RelayCommand(TakePhoto)); }
         }
 
+        public ICommand SaveIssueCommand
+        {
+            get { return _saveIssueCommand ?? (_saveIssueCommand = new RelayCommand(SaveIssue, CanSaveIssue)); }
+        }
+
+        public ICommand CancelIssueCommand
+        {
+            get { return _cancelIssueCommand ?? (_cancelIssueCommand = new RelayCommand(CancelIssue)); }
+        }
+
         private void SelectPicture()
         {
             _specialTasksProvider.ChoosePicture();
@@ -59,6 +85,24 @@ namespace ToBeOrNot.ViewModels
         private void TakePhoto()
         {
             _specialTasksProvider.TakePhoto();
+        }
+
+        private void SaveIssue()
+        {
+            var newIssue = new Issue(_subject);
+            _dataProvider.Save(newIssue);
+            // TODO: pass issue id as parameter to navigation query
+            _navigationService.Navigate(new Uri("/Views/ProsAndConsPage.xaml", UriKind.Relative));
+        }
+
+        private bool CanSaveIssue()
+        {
+            return !string.IsNullOrWhiteSpace(_subject);
+        }
+
+        private void CancelIssue()
+        {
+            _navigationService.GoBack();
         }
     }
 }

@@ -17,6 +17,7 @@ namespace ToBeOrNot.ViewModels
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<AboutViewModel>();
             SimpleIoc.Default.Register<NewIssueViewModel>();
+            SimpleIoc.Default.Register<ProsAndConsViewModel>();
         }
 
         public MainViewModel Main
@@ -32,6 +33,11 @@ namespace ToBeOrNot.ViewModels
         public NewIssueViewModel NewIssue
         {
             get { return ServiceLocator.Current.GetInstance<NewIssueViewModel>(); }
+        }
+
+        public ProsAndConsViewModel ProsAndCons
+        {
+            get { return ServiceLocator.Current.GetInstance<ProsAndConsViewModel>(); }
         }
     }
 }
