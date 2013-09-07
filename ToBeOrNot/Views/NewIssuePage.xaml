@@ -40,7 +40,7 @@
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0">
                 <TextBlock Text="{Binding Path=LocalizedResources.SubjectText, Source={StaticResource LocalizedStrings}}"/>
-                <TextBox Text="{Binding Subject}" x:Name="issueSubjectTextBox"/>
+                <TextBox Text="{Binding Subject, Mode=TwoWay}" x:Name="issueSubjectTextBox"/>
             </StackPanel>
             <Image Grid.Row="1" Source="{Binding SelectedImage}"
                    Margin="15"/>

@@ -13,5 +13,7 @@ namespace ToBeOrNot.Model.Data
         void CleanUpDatabase();
 
         void Save(Issue issue);
+
+        Issue LoadIssue(int issueKey);
     }
 }

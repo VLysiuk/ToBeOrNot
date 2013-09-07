@@ -2,6 +2,7 @@
 using Microsoft.Practices.ServiceLocation;
 using ToBeOrNot.Model;
 using ToBeOrNot.Model.Data;
+using ToBeOrNot.ViewModels.Navigation;
 
 namespace ToBeOrNot.ViewModels
 {

@@ -10,15 +10,21 @@ namespace ToBeOrNot.Model
 {
     public class Issue : DataItem
     {
+        private List<EvaluationItem> _positivePoints;
+
+        private List<EvaluationItem> _negativePoints;
+
         public Issue()
         {
+            _positivePoints = new List<EvaluationItem>();
+            _negativePoints = new List<EvaluationItem>();
         }
 
         public Issue(string subject)
         {
             Subject = subject;
-            PositivePoints = new List<EvaluationItem>();
-            NegativePoints = new List<EvaluationItem>();
+            _positivePoints = new List<EvaluationItem>();
+            _negativePoints = new List<EvaluationItem>();
         }
 
         public string Subject { get; set; }
@@ -27,8 +33,24 @@ namespace ToBeOrNot.Model
 
         public bool IsDecided { get; set; }
 
-        public IEnumerable<EvaluationItem> PositivePoints { get; private set; }
+        public IEnumerable<EvaluationItem> PositivePoints
+        {
+            get { return _positivePoints; }
+        }
 
-        public IEnumerable<EvaluationItem> NegativePoints { get; private set; }
+        public IEnumerable<EvaluationItem> NegativePoints
+        {
+            get { return _negativePoints; }
+        }
+
+        public void AddPositivePoint(EvaluationItem evaluationItem)
+        {
+            _positivePoints.Add(evaluationItem);
+        }
+
+        public void AddNegativePoint(EvaluationItem evaluationItem)
+        {
+            _negativePoints.Add(evaluationItem);
+        }
     }
 }

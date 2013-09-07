@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using ToBeOrNot.Model;
 using ToBeOrNot.Model.Data;
+using ToBeOrNot.ViewModels.Navigation;
 using ToBeOrNot.Views;
 
 namespace ToBeOrNot.ViewModels
@@ -40,6 +42,7 @@ namespace ToBeOrNot.ViewModels
             {
                 _subject = value;
                 RaisePropertyChanged(() => Subject);
+                _saveIssueCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -91,8 +94,9 @@ namespace ToBeOrNot.ViewModels
         {
             var newIssue = new Issue(_subject);
             _dataProvider.Save(newIssue);
-            // TODO: pass issue id as parameter to navigation query
-            _navigationService.Navigate(new Uri("/Views/ProsAndConsPage.xaml", UriKind.Relative));
+            _navigationService.Navigate(
+                new Uri("/Views/ProsAndConsPage.xaml", UriKind.Relative),
+                new Dictionary<string, object> { { "issueKey", newIssue.Key } });
         }
 
         private bool CanSaveIssue()

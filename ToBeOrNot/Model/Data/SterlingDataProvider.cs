@@ -42,5 +42,15 @@ namespace ToBeOrNot.Model.Data
             _database.Save(issue);
             _database.Flush();
         }
+
+        public Issue LoadIssue(int issueKey)
+        {
+            var tableKey = _database.Query<Issue, int>().FirstOrDefault(i => i.Key == issueKey);
+            
+            if (tableKey == null)
+                return null;
+
+            return tableKey.LazyValue.Value;
+        }
     }
 }

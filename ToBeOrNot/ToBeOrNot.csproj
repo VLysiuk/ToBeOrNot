@@ -116,9 +116,9 @@
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AboutViewModel.cs" />
-    <Compile Include="ViewModels\INavigationService.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\NavigationService.cs" />
+    <Compile Include="ViewModels\Navigation\INavigationService.cs" />
+    <Compile Include="ViewModels\Navigation\NavigationService.cs" />
     <Compile Include="ViewModels\NewIssueViewModel.cs" />
     <Compile Include="ViewModels\ProsAndConsViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
