@@ -115,6 +115,15 @@ namespace ToBeOrNot.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to cancel.
+        /// </summary>
+        public static string CancelButtonText {
+            get {
+                return ResourceManager.GetString("CancelButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to create.
         /// </summary>
         public static string CreateAppBarButtonText {
@@ -196,6 +205,15 @@ namespace ToBeOrNot.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to make decision.
+        /// </summary>
+        public static string MakeDecisionButtonText {
+            get {
+                return ResourceManager.GetString("MakeDecisionButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to photo.
         /// </summary>
         public static string MakePhotoAppBarButtonText {
@@ -210,6 +228,15 @@ namespace ToBeOrNot.Resources {
         public static string NewIssueTitle {
             get {
                 return ResourceManager.GetString("NewIssueTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        public static string NoText {
+            get {
+                return ResourceManager.GetString("NoText", resourceCulture);
             }
         }
         
@@ -277,11 +304,29 @@ namespace ToBeOrNot.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to To be?.
+        /// </summary>
+        public static string ToBeText {
+            get {
+                return ResourceManager.GetString("ToBeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to what&apos;s new.
         /// </summary>
         public static string WhatIsNewTitle {
             get {
                 return ResourceManager.GetString("WhatIsNewTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        public static string YesText {
+            get {
+                return ResourceManager.GetString("YesText", resourceCulture);
             }
         }
     }

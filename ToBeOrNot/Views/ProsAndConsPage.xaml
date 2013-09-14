@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:bar="clr-namespace:BindableApplicationBar;assembly=BindableApplicationBar"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -14,7 +15,14 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
-
+    
+    <phone:PhoneApplicationPage.Resources>
+        <Style TargetType="controls:ToggleSwitch">
+            <Setter Property="Foreground" Value="Crimson" />
+            <Setter Property="SwitchForeground" Value="DarkGreen" />
+        </Style>
+    </phone:PhoneApplicationPage.Resources>
+    
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
@@ -67,6 +75,21 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
+        <Popup x:Name="DecidePopup" Grid.Row="1" Margin="35"
+               IsOpen="{Binding IsDecisionPopupVisible}" >
+            <Border  BorderThickness="2" BorderBrush="BurlyWood">
+                <StackPanel>
+                    <controls:ToggleSwitch Content="{Binding DecisionText}" 
+                                           Header="{Binding Path=LocalizedResources.ToBeText, Source={StaticResource LocalizedStrings}}"
+                                           IsChecked="{Binding IsDecisionPositive}">
+                    </controls:ToggleSwitch>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Width="200" Content="{Binding Path=LocalizedResources.MakeDecisionButtonText, Source={StaticResource LocalizedStrings}}" Command="{Binding MakeDecisionCommand}"/>
+                        <Button Width="200" Content="{Binding Path=LocalizedResources.CancelButtonText, Source={StaticResource LocalizedStrings}}" Command="{Binding CancelDecisionCommand}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Popup>
     </Grid>
     <bar:Bindable.ApplicationBar>
         <bar:BindableApplicationBar IsEnabled="True" IsVisible="True"
@@ -78,13 +101,13 @@
             
             <bar:BindableApplicationBarButton Text="{Binding Path=LocalizedResources.DecideAppBarButtonText, Source={StaticResource LocalizedStrings}}"
                                               IconUri="/Assets/appbar.check.rest.png" 
-                                              x:Name="CreateNewAppBarButton"
-                                              Command="{Binding DecideIssueCommand}"/>
+                                              x:Name="DecideAppBarButton"
+                                              Command="{Binding OpenDecidePromptCommand}"/>
 
             <bar:BindableApplicationBarButton Text="{Binding Path=LocalizedResources.CancelAppBarButtonText, Source={StaticResource LocalizedStrings}}"
                                               IconUri="/Assets/appbar.cancel.rest.png" 
-                                              x:Name="CancelAppBarButton"
-                                              Command="{Binding DecideLaterIssueCommand}"/>
+                                              x:Name="DecideLaterAppBarButton"
+                                              Command="{Binding DecideLaterCommand}"/>
         </bar:BindableApplicationBar>
     </bar:Bindable.ApplicationBar>
 </phone:PhoneApplicationPage>

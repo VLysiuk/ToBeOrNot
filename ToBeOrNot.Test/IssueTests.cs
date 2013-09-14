@@ -34,5 +34,21 @@ namespace ToBeOrNot.Test
             Assert.IsTrue(issue.NegativePoints.Count() == 1);
             Assert.IsTrue(issue.NegativePoints.Any(i => i.Name == "price"));
         }
+
+        [Test]
+        public void ShouldRemoveAllPositiveAndNegativeItemsWhenClearAllPoints()
+        {
+            var issue = new Issue("test");
+            var negativePoint = new EvaluationItem { Name = "price", Value = ItemValue.Big };
+            var positivePoint = new EvaluationItem { Name = "price", Value = ItemValue.Big };
+
+            issue.AddPositivePoint(positivePoint);
+            issue.AddNegativePoint(negativePoint);
+
+            issue.ClearAllPoints();
+
+            Assert.IsFalse(issue.PositivePoints.Any());
+            Assert.IsFalse(issue.NegativePoints.Any());
+        }
     }
 }

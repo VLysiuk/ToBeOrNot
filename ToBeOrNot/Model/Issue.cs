@@ -8,6 +8,13 @@ using ToBeOrNot.Model.Data;
 
 namespace ToBeOrNot.Model
 {
+    public enum Decision
+    {
+        None,
+        Negative,
+        Positive
+    }
+
     public class Issue : DataItem
     {
         private List<EvaluationItem> _positivePoints;
@@ -31,7 +38,7 @@ namespace ToBeOrNot.Model
 
         public BitmapImage Image { get; set; }
 
-        public bool IsDecided { get; set; }
+        public Decision Decision { get; set; }
 
         public IEnumerable<EvaluationItem> PositivePoints
         {
@@ -51,6 +58,12 @@ namespace ToBeOrNot.Model
         public void AddNegativePoint(EvaluationItem evaluationItem)
         {
             _negativePoints.Add(evaluationItem);
+        }
+
+        public void ClearAllPoints()
+        {
+            _positivePoints.Clear();
+            _negativePoints.Clear();
         }
     }
 }
