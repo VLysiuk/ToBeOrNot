@@ -21,8 +21,15 @@ namespace ToBeOrNot.ViewModels
         private RelayCommand _decideLaterCommand;
         private RelayCommand _openDecidePromptCommand;
         private RelayCommand _cancelDecisionCommand;
+        private RelayCommand _addProsConsItemCommand;
+        private RelayCommand _cancelAddItemCommand;
+        private RelayCommand _openAddPromptCommand;
         private bool _isDecisionPopupVisible;
         private bool _isDecisionPositive;
+        private bool _isProsItem;
+        private string _prosAndConsItemText;
+        private bool _isAddPopupVisible;
+        private ItemValue _prosAndConsValue;
 
         public ProsAndConsViewModel(IDataProvider dataProvider, INavigationService navigationService)
         {
@@ -111,6 +118,68 @@ namespace ToBeOrNot.ViewModels
             get { return IsDecisionPositive ? Resources.AppResources.YesText : Resources.AppResources.NoText; }
         }
 
+        public bool IsAddPopupVisible
+        {
+            get
+            {
+                return _isAddPopupVisible;
+            }
+
+            set
+            {
+                _isAddPopupVisible = value;
+                RaisePropertyChanged(() => IsAddPopupVisible);
+            }
+        }
+
+        public bool IsProsItem
+        {
+            get 
+            {
+                return _isProsItem;
+            }
+
+            set 
+            { 
+                _isProsItem = value;
+                RaisePropertyChanged(() => IsProsItem);
+                RaisePropertyChanged(() => EvaluationValueText);
+            }
+        }
+
+        public string EvaluationValueText
+        {
+            get { return IsProsItem ? Resources.AppResources.PositiveText : Resources.AppResources.NegativeText; }
+        }
+
+        public string ProsAndConsItemText
+        {
+            get
+            {
+                return _prosAndConsItemText;
+            }
+
+            set 
+            {
+                _prosAndConsItemText = value;
+                RaisePropertyChanged(() => ProsAndConsItemText);
+            }
+        }
+
+        public ItemValue ProsAndConsValue
+        {
+            get
+            {
+                return _prosAndConsValue;
+            }
+
+            set
+            {
+                _prosAndConsValue = value;
+                RaisePropertyChanged(() => ProsAndConsValue);
+            }
+        }
+
         public ICommand MakeDecisionCommand
         {
             get { return _makeDecisionCommand ?? (_makeDecisionCommand = new RelayCommand(MakeDecision)); }
@@ -129,6 +198,25 @@ namespace ToBeOrNot.ViewModels
         public ICommand CancelDecisionCommand
         {
             get { return _cancelDecisionCommand ?? (_cancelDecisionCommand = new RelayCommand(CancelDecision)); }
+        }
+
+        public ICommand OpenAddPromptCommand
+        {
+            get { return _openAddPromptCommand ?? (_openAddPromptCommand = new RelayCommand(OpenAddPrompt)); }
+        }
+
+        public ICommand AddProsConsItemCommand
+        {
+            get
+            {
+                return _addProsConsItemCommand ??
+                       (_addProsConsItemCommand = new RelayCommand(AddProsConsItem, CanAddProsConsItem));
+            }
+        }
+
+        public ICommand CancelAddItemCommand
+        {
+            get { return _cancelAddItemCommand ?? (_cancelAddItemCommand = new RelayCommand(CancelAddItem)); }
         }
 
         private void MakeDecision()
@@ -170,6 +258,40 @@ namespace ToBeOrNot.ViewModels
         private void CancelDecision()
         {
             IsDecisionPopupVisible = false;
+        }
+
+        private void OpenAddPrompt()
+        {
+            IsAddPopupVisible = true;
+        }
+
+        private void AddProsConsItem()
+        {
+            var evaluationItem = new EvaluationItem {Name = ProsAndConsItemText, Value = ProsAndConsValue};
+            if (IsProsItem)
+                ProsItems.Add(evaluationItem);
+            else
+                ConsItems.Add(evaluationItem);
+
+            ResetProsAndConsValues();
+        }
+
+        private bool CanAddProsConsItem()
+        {
+            return !string.IsNullOrEmpty(ProsAndConsItemText);
+        }
+
+        private void CancelAddItem()
+        {
+            IsAddPopupVisible = false;
+            ResetProsAndConsValues();
+        }
+
+        private void ResetProsAndConsValues()
+        {
+            ProsAndConsItemText = string.Empty;
+            IsProsItem = false;
+            ProsAndConsValue = ItemValue.Normal;
         }
     }
 }

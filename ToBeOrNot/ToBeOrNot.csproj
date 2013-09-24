@@ -97,6 +97,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Misc\EnumToBoolConverter.cs" />
     <Compile Include="Misc\SelectedPictureEventArgs.cs" />
     <Compile Include="Model\AppSettingsProvider.cs" />
     <Compile Include="Model\Data\DataItem.cs" />

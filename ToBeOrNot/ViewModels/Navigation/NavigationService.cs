@@ -9,6 +9,11 @@ namespace ToBeOrNot.ViewModels.Navigation
     {
         private Dictionary<string, object> _navigationContext;
 
+        public NavigationService()
+        {
+            _navigationContext = new Dictionary<string, object>();
+        }
+
         public bool CanGoBack
         {
             get { return RootFrame.CanGoBack; }

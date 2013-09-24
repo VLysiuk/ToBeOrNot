@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
 using ToBeOrNot.Model;
@@ -23,14 +24,13 @@ namespace ToBeOrNot.Test
         {
             _dataProvider = Substitute.For<IDataProvider>();
             _navigationService = Substitute.For<INavigationService>();
+            var testIssue = new Issue { Subject = "Test" };
+            _dataProvider.LoadIssue(Arg.Any<int>()).Returns(testIssue);
         }
 
         [Test]
         public void ShouldExtractCurrentIssueKeyWhenCreated()
         {
-            var testIssue = new Issue {Subject = "Test"};
-            _dataProvider.LoadIssue(Arg.Any<int>()).Returns(testIssue);
-
             var prosAndConsViewModel = new ProsAndConsViewModel(_dataProvider, _navigationService);
             _navigationService.Received().GetNavigationParameter<int>(Arg.Any<string>());
         }
@@ -38,9 +38,6 @@ namespace ToBeOrNot.Test
         [Test]
         public void ShouldExtractCurrentIssueWhenCreated()
         {
-            var testIssue = new Issue { Subject = "Test" };
-            _dataProvider.LoadIssue(Arg.Any<int>()).Returns(testIssue);
-
             var prosAndConsViewModel = new ProsAndConsViewModel(_dataProvider, _navigationService);
             _dataProvider.Received().LoadIssue(Arg.Any<int>());
         }
@@ -102,8 +99,6 @@ namespace ToBeOrNot.Test
         [Test]
         public void ShouldNavigateToMainPageWhenDecideLater()
         {
-            var testIssue = new Issue { Subject = "Test" };
-            _dataProvider.LoadIssue(Arg.Any<int>()).Returns(testIssue);
             var prosAndConsViewModel = new ProsAndConsViewModel(_dataProvider, _navigationService);
 
             prosAndConsViewModel.DecideLaterCommand.Execute(null);
@@ -124,10 +119,8 @@ namespace ToBeOrNot.Test
         }
 
         [Test]
-        public void ShouldOpenPopupWhenOpenDecidePromptCommand()
+        public void ShouldOpenPopupWhenExecDecidePromptCommand()
         {
-            var testIssue = new Issue { Subject = "Test" };
-            _dataProvider.LoadIssue(Arg.Any<int>()).Returns(testIssue);
             var prosAndConsViewModel = new ProsAndConsViewModel(_dataProvider, _navigationService);
 
             prosAndConsViewModel.OpenDecidePromptCommand.Execute(null);
@@ -138,9 +131,6 @@ namespace ToBeOrNot.Test
         [Test]
         public void ShouldClosePopupWhenCancelDecision()
         {
-            var testIssue = new Issue { Subject = "Test" };
-            _dataProvider.LoadIssue(Arg.Any<int>()).Returns(testIssue);
-
             var prosAndConsViewModel = new ProsAndConsViewModel(_dataProvider, _navigationService);
 
             prosAndConsViewModel.OpenDecidePromptCommand.Execute(null);
@@ -195,13 +185,93 @@ namespace ToBeOrNot.Test
         [Test]
         public void ShouldNavigateToMainPageWhenDecided()
         {
-            var testIssue = new Issue { Subject = "Test" };
-            _dataProvider.LoadIssue(Arg.Any<int>()).Returns(testIssue);
             var prosAndConsViewModel = new ProsAndConsViewModel(_dataProvider, _navigationService);
 
             prosAndConsViewModel.MakeDecisionCommand.Execute(null);
 
             _navigationService.Received().Navigate(Arg.Is<Uri>(uri => uri.OriginalString.Contains("MainPage.xaml")));
+        }
+
+        [Test]
+        public void ShouldOpenPopupWhenExecAddPromptCommand()
+        {
+            var prosAndConsViewModel = new ProsAndConsViewModel(_dataProvider, _navigationService);
+            
+            prosAndConsViewModel.OpenAddPromptCommand.Execute(null);
+
+            prosAndConsViewModel.IsAddPopupVisible.Should().BeTrue();
+        }
+
+        [Test]
+        public void ShouldClosePopupWhenCancelAddProsAndConsItem()
+        {
+            var prosAndConsViewModel = new ProsAndConsViewModel(_dataProvider, _navigationService);
+
+            prosAndConsViewModel.OpenAddPromptCommand.Execute(null);
+            prosAndConsViewModel.CancelAddItemCommand.Execute(null);
+
+            prosAndConsViewModel.IsAddPopupVisible.Should().BeFalse();
+        }
+
+        [Test]
+        public void ShouldNotAddProsAndConsItemWhenItemTextNotSpecified()
+        {
+            var prosAndConsViewModel = new ProsAndConsViewModel(_dataProvider, _navigationService);
+
+            prosAndConsViewModel.ProsAndConsItemText = string.Empty;
+
+            var canAddItem = prosAndConsViewModel.AddProsConsItemCommand.CanExecute(null);
+
+            canAddItem.Should().BeFalse();
+        }
+
+        [Test]
+        public void ShouldAddProsAndConsItemToApproptiateList()
+        {
+            var prosAndConsViewModel = new ProsAndConsViewModel(_dataProvider, _navigationService);
+
+            prosAndConsViewModel.ProsAndConsItemText = "Good";
+            prosAndConsViewModel.IsProsItem = true;
+            prosAndConsViewModel.ProsAndConsValue = ItemValue.Big;
+
+            prosAndConsViewModel.AddProsConsItemCommand.Execute(null);
+
+            var addedItem = prosAndConsViewModel.ProsItems.FirstOrDefault(i => i.Name == "Good");
+            
+            addedItem.Should().NotBeNull();
+            addedItem.Value.ShouldBeEquivalentTo(ItemValue.Big);
+        }
+
+        [Test]
+        public void ShouldResetValuesAfterAddingProsAndConsItem()
+        {
+            var prosAndConsViewModel = new ProsAndConsViewModel(_dataProvider, _navigationService);
+
+            prosAndConsViewModel.ProsAndConsItemText = "Bad";
+            prosAndConsViewModel.IsProsItem = true;
+            prosAndConsViewModel.ProsAndConsValue = ItemValue.Small;
+
+            prosAndConsViewModel.AddProsConsItemCommand.Execute(null);
+
+            prosAndConsViewModel.ProsAndConsItemText.Should().BeEmpty();
+            prosAndConsViewModel.IsProsItem.Should().BeFalse();
+            prosAndConsViewModel.ProsAndConsValue.ShouldBeEquivalentTo(ItemValue.Normal);
+        }
+
+        [Test]
+        public void ShouldResetValuesWhenCancelProsAndConsItem()
+        {
+            var prosAndConsViewModel = new ProsAndConsViewModel(_dataProvider, _navigationService);
+
+            prosAndConsViewModel.ProsAndConsItemText = "Bad";
+            prosAndConsViewModel.IsProsItem = true;
+            prosAndConsViewModel.ProsAndConsValue = ItemValue.Small;
+
+            prosAndConsViewModel.CancelAddItemCommand.Execute(null);
+
+            prosAndConsViewModel.ProsAndConsItemText.Should().BeEmpty();
+            prosAndConsViewModel.IsProsItem.Should().BeFalse();
+            prosAndConsViewModel.ProsAndConsValue.ShouldBeEquivalentTo(ItemValue.Normal);
         }
     }
 }

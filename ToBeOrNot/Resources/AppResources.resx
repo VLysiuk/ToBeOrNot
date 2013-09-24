@@ -209,4 +209,19 @@
   <data name="YesText" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="NegativeText" xml:space="preserve">
+    <value>Negative</value>
+  </data>
+  <data name="PositiveText" xml:space="preserve">
+    <value>Positive</value>
+  </data>
+  <data name="BigItemText" xml:space="preserve">
+    <value>big</value>
+  </data>
+  <data name="NormalItemText" xml:space="preserve">
+    <value>normal</value>
+  </data>
+  <data name="SmallItemText" xml:space="preserve">
+    <value>small</value>
+  </data>
 </root>

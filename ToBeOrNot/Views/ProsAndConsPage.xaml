@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:bar="clr-namespace:BindableApplicationBar;assembly=BindableApplicationBar"
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:local="clr-namespace:ToBeOrNot.Misc" xmlns:model="clr-namespace:ToBeOrNot.Model"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -17,6 +18,7 @@
     shell:SystemTray.IsVisible="True">
     
     <phone:PhoneApplicationPage.Resources>
+        <local:EnumToBoolConverter x:Key="EnumToBoolConverter" />
         <Style TargetType="controls:ToggleSwitch">
             <Setter Property="Foreground" Value="Crimson" />
             <Setter Property="SwitchForeground" Value="DarkGreen" />
@@ -81,11 +83,35 @@
                 <StackPanel>
                     <controls:ToggleSwitch Content="{Binding DecisionText}" 
                                            Header="{Binding Path=LocalizedResources.ToBeText, Source={StaticResource LocalizedStrings}}"
-                                           IsChecked="{Binding IsDecisionPositive}">
+                                           IsChecked="{Binding IsDecisionPositive, Mode=TwoWay}">
                     </controls:ToggleSwitch>
                     <StackPanel Orientation="Horizontal">
                         <Button Width="200" Content="{Binding Path=LocalizedResources.MakeDecisionButtonText, Source={StaticResource LocalizedStrings}}" Command="{Binding MakeDecisionCommand}"/>
                         <Button Width="200" Content="{Binding Path=LocalizedResources.CancelButtonText, Source={StaticResource LocalizedStrings}}" Command="{Binding CancelDecisionCommand}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Popup>
+
+        <Popup x:Name="AddProsConsPopup" Grid.Row="1" Margin="35" IsOpen="{Binding IsAddPopupVisible}">
+            <Border  BorderThickness="2" BorderBrush="BurlyWood">
+                <StackPanel>
+                    <TextBox Margin="0,0,0,20" Text="{Binding ProsAndConsItemText}"/>
+                    <controls:ToggleSwitch Content="{Binding EvaluationValueText}" IsChecked="{Binding IsProsItem, Mode=TwoWay}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <RadioButton Content="{Binding Path=LocalizedResources.BigItemText, Source={StaticResource LocalizedStrings}}" 
+                                     IsChecked="{Binding ProsAndConsValue, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter},
+                                                ConverterParameter=Big}"/>
+                        <RadioButton Content="{Binding Path=LocalizedResources.NormalItemText, Source={StaticResource LocalizedStrings}}"
+                                     IsChecked="{Binding ProsAndConsValue, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter},
+                                                ConverterParameter=Normal}"/>
+                        <RadioButton  Content="{Binding Path=LocalizedResources.SmallItemText, Source={StaticResource LocalizedStrings}}"
+                                      IsChecked="{Binding ProsAndConsValue, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter},
+                                                ConverterParameter=Small}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Width="200" Content="{Binding Path=LocalizedResources.AppBarButtonText, Source={StaticResource LocalizedStrings}}" Command="{Binding AddProsConsItemCommand}"/>
+                        <Button Width="200" Content="{Binding Path=LocalizedResources.CancelButtonText, Source={StaticResource LocalizedStrings}}" Command="{Binding CancelAddItemCommand}"/>
                     </StackPanel>
                 </StackPanel>
             </Border>
@@ -96,7 +122,7 @@
                                     IsMenuEnabled="True" IsMenuVisible="True">
             <bar:BindableApplicationBarButton Text="{Binding Path=LocalizedResources.AppBarButtonText, Source={StaticResource LocalizedStrings}}"
                                              IconUri="/Assets/appbar.add.rest.png" 
-                                             Command="{Binding AddEvaluationCommand}"
+                                             Command="{Binding OpenAddPromptCommand}"
                                              x:Name="NewTaskAppBarButton"/>
             
             <bar:BindableApplicationBarButton Text="{Binding Path=LocalizedResources.DecideAppBarButtonText, Source={StaticResource LocalizedStrings}}"

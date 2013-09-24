@@ -106,6 +106,15 @@ namespace ToBeOrNot.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to big.
+        /// </summary>
+        public static string BigItemText {
+            get {
+                return ResourceManager.GetString("BigItemText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to cancel.
         /// </summary>
         public static string CancelAppBarButtonText {
@@ -223,6 +232,15 @@ namespace ToBeOrNot.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Negative.
+        /// </summary>
+        public static string NegativeText {
+            get {
+                return ResourceManager.GetString("NegativeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to new issue.
         /// </summary>
         public static string NewIssueTitle {
@@ -232,11 +250,29 @@ namespace ToBeOrNot.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to normal.
+        /// </summary>
+        public static string NormalItemText {
+            get {
+                return ResourceManager.GetString("NormalItemText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         public static string NoText {
             get {
                 return ResourceManager.GetString("NoText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Positive.
+        /// </summary>
+        public static string PositiveText {
+            get {
+                return ResourceManager.GetString("PositiveText", resourceCulture);
             }
         }
         
@@ -291,6 +327,15 @@ namespace ToBeOrNot.Resources {
         public static string SelectPictureText {
             get {
                 return ResourceManager.GetString("SelectPictureText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to small.
+        /// </summary>
+        public static string SmallItemText {
+            get {
+                return ResourceManager.GetString("SmallItemText", resourceCulture);
             }
         }
         
