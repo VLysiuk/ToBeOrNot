@@ -173,6 +173,7 @@
     <Content Include="Assets\appbar.cancel.rest.png" />
     <Content Include="Assets\appbar.check.rest.png" />
     <Content Include="Assets\appbar.delete.rest.png" />
+    <Content Include="Assets\appbar.edit.rest.png" />
     <Content Include="Assets\ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

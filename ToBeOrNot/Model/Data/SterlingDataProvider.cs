@@ -52,5 +52,19 @@ namespace ToBeOrNot.Model.Data
 
             return tableKey.LazyValue.Value;
         }
+
+        public IEnumerable<Issue> LoadCurrentIssues()
+        {
+            return _database.Query<Issue, int>()
+                            .Where(i => i.LazyValue.Value.Decision == Decision.None)
+                            .Select(i => i.LazyValue.Value);
+        }
+
+        public IEnumerable<Issue> LoadDecidedIssues()
+        {
+            return _database.Query<Issue, int>()
+                            .Where(i => i.LazyValue.Value.Decision != Decision.None)
+                            .Select(i => i.LazyValue.Value);
+        }
     }
 }

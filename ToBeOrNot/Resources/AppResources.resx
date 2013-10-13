@@ -224,4 +224,10 @@
   <data name="SmallItemText" xml:space="preserve">
     <value>small</value>
   </data>
+  <data name="DeleteButtonText" xml:space="preserve">
+    <value>delete</value>
+  </data>
+  <data name="EditButtonText" xml:space="preserve">
+    <value>edit</value>
+  </data>
 </root>

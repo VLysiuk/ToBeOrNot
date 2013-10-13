@@ -178,6 +178,24 @@ namespace ToBeOrNot.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to delete.
+        /// </summary>
+        public static string DeleteButtonText {
+            get {
+                return ResourceManager.GetString("DeleteButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to edit.
+        /// </summary>
+        public static string EditButtonText {
+            get {
+                return ResourceManager.GetString("EditButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to write an email.
         /// </summary>
         public static string EmailText {

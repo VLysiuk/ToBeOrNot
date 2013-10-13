@@ -15,5 +15,9 @@ namespace ToBeOrNot.Model.Data
         void Save(Issue issue);
 
         Issue LoadIssue(int issueKey);
+
+        IEnumerable<Issue> LoadCurrentIssues();
+        
+        IEnumerable<Issue> LoadDecidedIssues();
     }
 }

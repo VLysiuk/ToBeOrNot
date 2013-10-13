@@ -22,16 +22,15 @@
             <!--Pivot item one-->
             <phone:PivotItem Header="{Binding Path=LocalizedResources.CurrentIssuesTitle, Source={StaticResource LocalizedStrings}}">
                 <!--Double line list with text wrapping-->
-                <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding Items}" >
-                    <phone:LongListSelector.ItemTemplate>
+                <ListBox Margin="0,0,-12,0"  ItemsSource="{Binding CurrentIssues}">
+                    <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Margin="0,0,0,17">
-                                <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                <TextBlock Text="{Binding LineTwo}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                <TextBlock Text="{Binding Subject}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
                             </StackPanel>
                         </DataTemplate>
-                    </phone:LongListSelector.ItemTemplate>
-                </phone:LongListSelector>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </phone:PivotItem>
 
             <!--Pivot item two-->
@@ -59,6 +58,16 @@
                                              IconUri="/Assets/appbar.add.rest.png" 
                                              Command="{Binding AddNewIssueCommand}"
                                              x:Name="NewTaskAppBarButton"/>
+
+            <bar:BindableApplicationBarButton Text="{Binding Path=LocalizedResources.EditButtonText, Source={StaticResource LocalizedStrings}}"
+                                             IconUri="/Assets/appbar.edit.rest.png" 
+                                             Command="{Binding EditIssueCommand}"
+                                             x:Name="EditTaskAppBarButton"/>
+
+            <bar:BindableApplicationBarButton Text="{Binding Path=LocalizedResources.DeleteButtonText, Source={StaticResource LocalizedStrings}}"
+                                             IconUri="/Assets/appbar.delete.rest.png" 
+                                             Command="{Binding DeleteIssueCommand}"
+                                             x:Name="DeleteTaskAppBarButton"/>
 
             <bar:BindableApplicationBar.MenuItems>
                 <bar:BindableApplicationBarMenuItem Text="{Binding Path=LocalizedResources.AboutTitle, Source={StaticResource LocalizedStrings}}"
