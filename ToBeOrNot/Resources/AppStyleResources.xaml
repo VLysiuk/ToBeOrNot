@@ -31,13 +31,12 @@
         </Setter>
     </Style>
     
-    <Style x:Key="AppLongListSelector" TargetType="phone:LongListSelector">
+    <Style x:Key="IssuesListBox" TargetType="ListBox">
         <Setter Property="ItemTemplate">
             <Setter.Value>
                 <DataTemplate>
-                    <StackPanel>
-                        <Image />
-                        <TextBlock Text="{TemplateBinding Subject}"/>
+                    <StackPanel Margin="0,0,0,17">
+                        <TextBlock Text="{Binding Subject}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextGroupHeaderStyle}"/>
                     </StackPanel>
                 </DataTemplate>
             </Setter.Value>

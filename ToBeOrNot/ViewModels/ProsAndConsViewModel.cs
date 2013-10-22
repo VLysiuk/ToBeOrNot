@@ -13,7 +13,7 @@ namespace ToBeOrNot.ViewModels
     {
         private readonly IDataProvider _dataProvider;
         private readonly INavigationService _navigationService;
-        private readonly Issue _currentIssue;
+        private Issue _currentIssue;
         private string _subject;
         private ObservableCollection<EvaluationItem> _prosItems;
         private ObservableCollection<EvaluationItem> _consItems;
@@ -24,6 +24,7 @@ namespace ToBeOrNot.ViewModels
         private RelayCommand _addProsConsItemCommand;
         private RelayCommand _cancelAddItemCommand;
         private RelayCommand _openAddPromptCommand;
+        private RelayCommand _navigatedToCommand;
         private bool _isDecisionPopupVisible;
         private bool _isDecisionPositive;
         private bool _isProsItem;
@@ -35,11 +36,6 @@ namespace ToBeOrNot.ViewModels
         {
             _dataProvider = dataProvider;
             _navigationService = navigationService;
-            var issueKey = _navigationService.GetNavigationParameter<int>("issueKey");
-            _currentIssue = _dataProvider.LoadIssue(issueKey);
-            Subject = _currentIssue.Subject;
-            ProsItems = new ObservableCollection<EvaluationItem>(_currentIssue.PositivePoints);
-            ConsItems = new ObservableCollection<EvaluationItem>(_currentIssue.NegativePoints);
         }
 
         public string Subject
@@ -219,6 +215,11 @@ namespace ToBeOrNot.ViewModels
             get { return _cancelAddItemCommand ?? (_cancelAddItemCommand = new RelayCommand(CancelAddItem)); }
         }
 
+        public ICommand NavigatedToCommand
+        {
+            get { return _navigatedToCommand ?? (_navigatedToCommand = new RelayCommand(NavigatedTo)); }
+        }
+
         private void MakeDecision()
         {
             _currentIssue.Decision = IsDecisionPositive ? Decision.Positive : Decision.Negative;
@@ -267,7 +268,7 @@ namespace ToBeOrNot.ViewModels
 
         private void AddProsConsItem()
         {
-            var evaluationItem = new EvaluationItem {Name = ProsAndConsItemText, Value = ProsAndConsValue};
+            var evaluationItem = new EvaluationItem { Name = ProsAndConsItemText, Value = ProsAndConsValue};
             if (IsProsItem)
                 ProsItems.Add(evaluationItem);
             else
@@ -292,6 +293,15 @@ namespace ToBeOrNot.ViewModels
             ProsAndConsItemText = string.Empty;
             IsProsItem = false;
             ProsAndConsValue = ItemValue.Normal;
+        }
+
+        private void NavigatedTo()
+        {
+            var issueKey = _navigationService.GetNavigationParameter<int>("issueKey");
+            _currentIssue = _dataProvider.LoadIssue(issueKey);
+            Subject = _currentIssue.Subject;
+            ProsItems = new ObservableCollection<EvaluationItem>(_currentIssue.PositivePoints);
+            ConsItems = new ObservableCollection<EvaluationItem>(_currentIssue.NegativePoints);
         }
     }
 }

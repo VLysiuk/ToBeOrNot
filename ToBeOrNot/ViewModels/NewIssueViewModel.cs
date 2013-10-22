@@ -42,7 +42,8 @@ namespace ToBeOrNot.ViewModels
             {
                 _subject = value;
                 RaisePropertyChanged(() => Subject);
-                _saveIssueCommand.RaiseCanExecuteChanged();
+                if (_saveIssueCommand != null)
+                    _saveIssueCommand.RaiseCanExecuteChanged();
             }
         }
 

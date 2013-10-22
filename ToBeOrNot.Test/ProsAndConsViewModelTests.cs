@@ -29,31 +29,34 @@ namespace ToBeOrNot.Test
         }
 
         [Test]
-        public void ShouldExtractCurrentIssueKeyWhenCreated()
+        public void ShouldExtractCurrentIssueKeyWhenNavigated()
         {
             var prosAndConsViewModel = new ProsAndConsViewModel(_dataProvider, _navigationService);
+            prosAndConsViewModel.NavigatedToCommand.Execute(null);
             _navigationService.Received().GetNavigationParameter<int>(Arg.Any<string>());
         }
 
         [Test]
-        public void ShouldExtractCurrentIssueWhenCreated()
+        public void ShouldExtractCurrentIssueWhenNavigated()
         {
             var prosAndConsViewModel = new ProsAndConsViewModel(_dataProvider, _navigationService);
+            prosAndConsViewModel.NavigatedToCommand.Execute(null);
             _dataProvider.Received().LoadIssue(Arg.Any<int>());
         }
 
         [Test]
-        public void ShouldSetSubjectWhenCreated()
+        public void ShouldSetSubjectWhenNavigated()
         {
             var testIssue = new Issue { Subject = "Test" };
             _dataProvider.LoadIssue(Arg.Any<int>()).Returns(testIssue);
             var prosAndConsViewModel = new ProsAndConsViewModel(_dataProvider, _navigationService);
+            prosAndConsViewModel.NavigatedToCommand.Execute(null);
 
             Assert.AreEqual("Test", prosAndConsViewModel.Subject);
         }
 
         [Test]
-        public void ShouldSetProsAndConsListsWhenCreated()
+        public void ShouldSetProsAndConsListsWhenNavigated()
         {
             var testIssue = new Issue { Subject = "Test" };
             testIssue.AddPositivePoint(new EvaluationItem());
@@ -61,6 +64,8 @@ namespace ToBeOrNot.Test
 
             _dataProvider.LoadIssue(Arg.Any<int>()).Returns(testIssue);
             var prosAndConsViewModel = new ProsAndConsViewModel(_dataProvider, _navigationService);
+
+            prosAndConsViewModel.NavigatedToCommand.Execute(null);
 
             Assert.IsTrue(prosAndConsViewModel.ProsItems.Count == 1);
             Assert.IsTrue(prosAndConsViewModel.ConsItems.Count == 1);
@@ -72,6 +77,7 @@ namespace ToBeOrNot.Test
             var testIssue = new Issue { Subject = "Test" };
             _dataProvider.LoadIssue(Arg.Any<int>()).Returns(testIssue);
             var prosAndConsViewModel = new ProsAndConsViewModel(_dataProvider, _navigationService);
+            prosAndConsViewModel.NavigatedToCommand.Execute(null);
 
             const string newSubject = "new subject";
             prosAndConsViewModel.Subject = newSubject;
@@ -90,6 +96,7 @@ namespace ToBeOrNot.Test
             var testIssue = new Issue { Subject = "Test" };
             _dataProvider.LoadIssue(Arg.Any<int>()).Returns(testIssue);
             var prosAndConsViewModel = new ProsAndConsViewModel(_dataProvider, _navigationService);
+            prosAndConsViewModel.NavigatedToCommand.Execute(null);
 
             prosAndConsViewModel.DecideLaterCommand.Execute(null);
 
@@ -100,6 +107,7 @@ namespace ToBeOrNot.Test
         public void ShouldNavigateToMainPageWhenDecideLater()
         {
             var prosAndConsViewModel = new ProsAndConsViewModel(_dataProvider, _navigationService);
+            prosAndConsViewModel.NavigatedToCommand.Execute(null);
 
             prosAndConsViewModel.DecideLaterCommand.Execute(null);
 
@@ -112,6 +120,7 @@ namespace ToBeOrNot.Test
             var testIssue = new Issue { Subject = "Test" };
             _dataProvider.LoadIssue(Arg.Any<int>()).Returns(testIssue);
             var prosAndConsViewModel = new ProsAndConsViewModel(_dataProvider, _navigationService);
+            prosAndConsViewModel.NavigatedToCommand.Execute(null);
 
             prosAndConsViewModel.DecideLaterCommand.Execute(null);
 
@@ -145,6 +154,7 @@ namespace ToBeOrNot.Test
             var testIssue = new Issue { Subject = "Test" };
             _dataProvider.LoadIssue(Arg.Any<int>()).Returns(testIssue);
             var prosAndConsViewModel = new ProsAndConsViewModel(_dataProvider, _navigationService);
+            prosAndConsViewModel.NavigatedToCommand.Execute(null);
             prosAndConsViewModel.IsDecisionPositive = true;
 
             prosAndConsViewModel.MakeDecisionCommand.Execute(null);
@@ -158,6 +168,7 @@ namespace ToBeOrNot.Test
             var testIssue = new Issue { Subject = "Test" };
             _dataProvider.LoadIssue(Arg.Any<int>()).Returns(testIssue);
             var prosAndConsViewModel = new ProsAndConsViewModel(_dataProvider, _navigationService);
+            prosAndConsViewModel.NavigatedToCommand.Execute(null);
 
             const string newSubject = "new subject";
             prosAndConsViewModel.Subject = newSubject;
@@ -176,6 +187,7 @@ namespace ToBeOrNot.Test
             var testIssue = new Issue { Subject = "Test" };
             _dataProvider.LoadIssue(Arg.Any<int>()).Returns(testIssue);
             var prosAndConsViewModel = new ProsAndConsViewModel(_dataProvider, _navigationService);
+            prosAndConsViewModel.NavigatedToCommand.Execute(null);
 
             prosAndConsViewModel.MakeDecisionCommand.Execute(null);
 
@@ -186,6 +198,7 @@ namespace ToBeOrNot.Test
         public void ShouldNavigateToMainPageWhenDecided()
         {
             var prosAndConsViewModel = new ProsAndConsViewModel(_dataProvider, _navigationService);
+            prosAndConsViewModel.NavigatedToCommand.Execute(null);
 
             prosAndConsViewModel.MakeDecisionCommand.Execute(null);
 
@@ -229,6 +242,7 @@ namespace ToBeOrNot.Test
         public void ShouldAddProsAndConsItemToApproptiateList()
         {
             var prosAndConsViewModel = new ProsAndConsViewModel(_dataProvider, _navigationService);
+            prosAndConsViewModel.NavigatedToCommand.Execute(null);
 
             prosAndConsViewModel.ProsAndConsItemText = "Good";
             prosAndConsViewModel.IsProsItem = true;
@@ -246,6 +260,7 @@ namespace ToBeOrNot.Test
         public void ShouldResetValuesAfterAddingProsAndConsItem()
         {
             var prosAndConsViewModel = new ProsAndConsViewModel(_dataProvider, _navigationService);
+            prosAndConsViewModel.NavigatedToCommand.Execute(null);
 
             prosAndConsViewModel.ProsAndConsItemText = "Bad";
             prosAndConsViewModel.IsProsItem = true;

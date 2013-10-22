@@ -47,10 +47,12 @@ namespace ToBeOrNot.Test
         }
 
         [Test]
-        public void ShouldLoadAllCurrentIssuesWhenCreated()
+        public void ShouldLoadAllCurrentIssuesWhenNavigated()
         {
             _dataProvider.LoadCurrentIssues().Returns(new List<Issue> { new Issue() });
             var mainViewModel = new MainViewModel(_navigationService, _dataProvider);
+
+            mainViewModel.NavigatedToCommand.Execute(null);
 
             _dataProvider.Received().LoadCurrentIssues();
             mainViewModel.CurrentIssues
@@ -60,16 +62,57 @@ namespace ToBeOrNot.Test
         }
 
         [Test]
-        public void ShouldLoadAllDecidedIssuesWhenCreated()
+        public void ShouldLoadAllDecidedIssuesWhenNavigated()
         {
             _dataProvider.LoadDecidedIssues().Returns(new List<Issue> {new Issue()});
             var mainViewModel = new MainViewModel(_navigationService, _dataProvider);
+
+            mainViewModel.NavigatedToCommand.Execute(null);
 
             _dataProvider.Received().LoadDecidedIssues();
             mainViewModel.DecidedIssues
                          .Should()
                          .NotBeEmpty()
                          .And.HaveCount(1);
+        }
+
+        [Test]
+        public void ShouldDeleteSelectedIssue()
+        {
+            var mainViewModel = new MainViewModel(_navigationService, _dataProvider);
+            mainViewModel.NavigatedToCommand.Execute(null);
+
+            mainViewModel.SelectedIssue = new Issue("Test");
+            mainViewModel.DeleteIssueCommand.Execute(null);
+
+            _dataProvider.Received().DeleteIssue(mainViewModel.SelectedIssue);
+        }
+
+        [Test]
+        public void ShouldNotDeleteIssueWhenItIsNotSelected()
+        {
+            var mainViewModel = new MainViewModel(_navigationService, _dataProvider);
+            mainViewModel.SelectedIssue = null;
+
+            var canExecute = mainViewModel.DeleteIssueCommand.CanExecute(null);
+
+            canExecute.Should().BeFalse();
+        }
+
+        [Test]
+        public void ShouldUpdateApropriateCollectionWhenDeleteIssue()
+        {
+            var testIssue = new Issue("Test");
+            _dataProvider.LoadCurrentIssues().Returns(new List<Issue> { testIssue, new Issue("Test1") });
+            _dataProvider.LoadDecidedIssues().Returns(new List<Issue>());
+
+            var mainViewModel = new MainViewModel(_navigationService, _dataProvider);
+            mainViewModel.NavigatedToCommand.Execute(null);
+
+            mainViewModel.SelectedIssue = testIssue;
+            mainViewModel.DeleteIssueCommand.Execute(null);
+
+            mainViewModel.CurrentIssues.Should().NotContain(i => i == testIssue);
         }
     }
 }

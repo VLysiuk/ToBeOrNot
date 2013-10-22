@@ -66,5 +66,10 @@ namespace ToBeOrNot.Model.Data
                             .Where(i => i.LazyValue.Value.Decision != Decision.None)
                             .Select(i => i.LazyValue.Value);
         }
+
+        public void DeleteIssue(Issue issue)
+        {
+            _database.Delete(issue);
+        }
     }
 }

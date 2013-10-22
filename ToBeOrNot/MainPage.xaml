@@ -14,7 +14,7 @@
     DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
-
+    
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
 
@@ -22,14 +22,9 @@
             <!--Pivot item one-->
             <phone:PivotItem Header="{Binding Path=LocalizedResources.CurrentIssuesTitle, Source={StaticResource LocalizedStrings}}">
                 <!--Double line list with text wrapping-->
-                <ListBox Margin="0,0,-12,0"  ItemsSource="{Binding CurrentIssues}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Margin="0,0,0,17">
-                                <TextBlock Text="{Binding Subject}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
+                <ListBox Margin="0,0,-12,0"  ItemsSource="{Binding CurrentIssues}" 
+                         SelectedItem="{Binding SelectedIssue, Mode=TwoWay}"
+                         Style="{StaticResource IssuesListBox}"> 
                 </ListBox>
             </phone:PivotItem>
 

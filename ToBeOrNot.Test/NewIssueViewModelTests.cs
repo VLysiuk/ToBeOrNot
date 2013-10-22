@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using NSubstitute;
 using NUnit.Framework;
 using ToBeOrNot.Model;
@@ -74,7 +75,9 @@ namespace ToBeOrNot.Test
 
             newIssueViewModel.SaveIssueCommand.Execute(null);
 
-            _navigationService.Received().Navigate(Arg.Is<Uri>(u => u.OriginalString.Contains("ProsAndConsPage.xaml")));
+            _navigationService.Received()
+                              .Navigate(Arg.Is<Uri>(u => u.OriginalString.Contains("ProsAndConsPage.xaml")),
+                                        Arg.Any<Dictionary<string, object>>());
         }
 
         [Test]

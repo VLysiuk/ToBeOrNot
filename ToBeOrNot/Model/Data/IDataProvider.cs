@@ -19,5 +19,7 @@ namespace ToBeOrNot.Model.Data
         IEnumerable<Issue> LoadCurrentIssues();
         
         IEnumerable<Issue> LoadDecidedIssues();
+
+        void DeleteIssue(Issue issue);
     }
 }
