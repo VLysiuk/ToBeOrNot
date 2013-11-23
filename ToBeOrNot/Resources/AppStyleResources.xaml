@@ -32,15 +32,76 @@
     </Style>
     
     <Style x:Key="IssuesListBox" TargetType="ListBox">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="ItemTemplate">
             <Setter.Value>
                 <DataTemplate>
-                    <StackPanel Margin="0,0,0,17">
-                        <TextBlock Text="{Binding Subject}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextGroupHeaderStyle}"/>
-                    </StackPanel>
+                    <UserControl>
+                        <Border x:Name="MyBorder" Background="Transparent">
+                            <VisualStateManager.VisualStateGroups  >
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="Selected">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background)" Storyboard.TargetName="MyBorder">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneAccentBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <StackPanel  Orientation="Horizontal">
+                                <TextBlock Text="{Binding Subject}" TextWrapping="Wrap" Foreground="White"
+                                   Margin="12,5,0,5" Style="{StaticResource PhoneTextLargeStyle}"/>
+                            </StackPanel>
+                        </Border>
+                    </UserControl>
                 </DataTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
+    <Style x:Key="ListBoxItemStyle1" TargetType="ListBoxItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Top"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="MyBorder" Background="Transparent">
+                            <VisualStateManager.VisualStateGroups  >
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="Selected">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background)" Storyboard.TargetName="MyBorder">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="BurlyWood"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Opacity)" Storyboard.TargetName="MyBorder">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="0.5"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter>
+                                <ContentPresenter.ContentTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <TextBlock x:Name="TextBlock" Text="{Binding Subject}" TextWrapping="Wrap" Foreground="White"
+                                                       Style="{StaticResource PhoneTextLargeStyle}"/>
+                                        </StackPanel>
+                                </DataTemplate>
+                                    
+                            </ContentPresenter.ContentTemplate>
+                            </ContentPresenter>
+                        </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

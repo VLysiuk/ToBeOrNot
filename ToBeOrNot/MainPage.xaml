@@ -16,31 +16,28 @@
     shell:SystemTray.IsVisible="True">
     
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot" >
+        <Grid.Background>
+            <ImageBrush Stretch="UniformToFill" Opacity="0.4" ImageSource="Assets\mainBackground.png"/>
+        </Grid.Background>
 
         <phone:Pivot Title="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}">
             <!--Pivot item one-->
             <phone:PivotItem Header="{Binding Path=LocalizedResources.CurrentIssuesTitle, Source={StaticResource LocalizedStrings}}">
-                <!--Double line list with text wrapping-->
+                <!--List of current issues-->
                 <ListBox Margin="0,0,-12,0"  ItemsSource="{Binding CurrentIssues}" 
                          SelectedItem="{Binding SelectedIssue, Mode=TwoWay}"
-                         Style="{StaticResource IssuesListBox}"> 
+                         ItemContainerStyle="{StaticResource ListBoxItemStyle1}"> 
                 </ListBox>
             </phone:PivotItem>
 
             <!--Pivot item two-->
             <phone:PivotItem Header="{Binding Path=LocalizedResources.DecidedIssuesTitle, Source={StaticResource LocalizedStrings}}">
-                <!--Double line list no text wrapping-->
-                <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding Items}">
-                    <phone:LongListSelector.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Margin="0,0,0,17">
-                                <TextBlock Text="{Binding LineOne}" TextWrapping="NoWrap" Margin="12,0,0,0" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                <TextBlock Text="{Binding LineThree}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </phone:LongListSelector.ItemTemplate>
-                </phone:LongListSelector>
+                <!--list of decided issues-->
+                <ListBox Margin="0,0,-12,0"  ItemsSource="{Binding DecidedIssues}" 
+                         SelectedItem="{Binding SelectedIssue, Mode=TwoWay}"
+                         ItemContainerStyle="{StaticResource ListBoxItemStyle1}">
+                </ListBox>
             </phone:PivotItem>
         </phone:Pivot>
      </Grid>
