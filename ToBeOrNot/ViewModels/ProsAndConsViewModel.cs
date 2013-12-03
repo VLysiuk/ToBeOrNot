@@ -159,6 +159,8 @@ namespace ToBeOrNot.ViewModels
             {
                 _prosAndConsItemText = value;
                 RaisePropertyChanged(() => ProsAndConsItemText);
+                if (_addProsConsItemCommand != null)
+                    _addProsConsItemCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -275,6 +277,7 @@ namespace ToBeOrNot.ViewModels
                 ConsItems.Add(evaluationItem);
 
             ResetProsAndConsValues();
+            IsAddPopupVisible = false;
         }
 
         private bool CanAddProsConsItem()

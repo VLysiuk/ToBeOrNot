@@ -288,5 +288,18 @@ namespace ToBeOrNot.Test
             prosAndConsViewModel.IsProsItem.Should().BeFalse();
             prosAndConsViewModel.ProsAndConsValue.ShouldBeEquivalentTo(ItemValue.Normal);
         }
+
+        [Test]
+        public void ShouldCloseAddPopupWhenAddedIssue()
+        {
+            var prosAndConsViewModel = new ProsAndConsViewModel(_dataProvider, _navigationService);
+            prosAndConsViewModel.NavigatedToCommand.Execute(null);
+
+            prosAndConsViewModel.OpenAddPromptCommand.Execute(null);
+            prosAndConsViewModel.ProsAndConsItemText = "test";
+            prosAndConsViewModel.AddProsConsItemCommand.Execute(null);
+
+            prosAndConsViewModel.IsAddPopupVisible.Should().BeFalse();
+        }
     }
 }

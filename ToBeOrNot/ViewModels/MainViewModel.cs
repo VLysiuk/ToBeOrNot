@@ -42,6 +42,8 @@ namespace ToBeOrNot.ViewModels
             {
                 _selectedIssue = value;
                 RaisePropertyChanged(() => SelectedIssue);
+                if (_deleteIssueCommand != null)
+                    _deleteIssueCommand.RaiseCanExecuteChanged();
             }
         }
 

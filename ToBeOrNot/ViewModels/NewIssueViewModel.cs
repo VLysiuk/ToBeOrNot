@@ -20,6 +20,7 @@ namespace ToBeOrNot.ViewModels
         private RelayCommand _takePhotoCommand;
         private RelayCommand _saveIssueCommand;
         private RelayCommand _cancelIssueCommand;
+        private RelayCommand _navigatedToCommand;
         private string _subject;
         private BitmapImage _selectedImage;
 
@@ -81,6 +82,11 @@ namespace ToBeOrNot.ViewModels
             get { return _cancelIssueCommand ?? (_cancelIssueCommand = new RelayCommand(CancelIssue)); }
         }
 
+        public ICommand NavigatedToCommand
+        {
+            get { return _navigatedToCommand ?? (_navigatedToCommand = new RelayCommand(NavigatedTo)); }
+        }
+
         private void SelectPicture()
         {
             _specialTasksProvider.ChoosePicture();
@@ -108,6 +114,12 @@ namespace ToBeOrNot.ViewModels
         private void CancelIssue()
         {
             _navigationService.GoBack();
+        }
+
+        private void NavigatedTo()
+        {
+            Subject = string.Empty;
+            SelectedImage = null;
         }
     }
 }

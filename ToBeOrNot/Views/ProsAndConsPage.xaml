@@ -96,7 +96,7 @@
         <Popup x:Name="AddProsConsPopup" Grid.Row="1" Margin="35" IsOpen="{Binding IsAddPopupVisible}">
             <Border  BorderThickness="2" BorderBrush="BurlyWood">
                 <StackPanel>
-                    <TextBox Margin="0,0,0,20" Text="{Binding ProsAndConsItemText}"/>
+                    <TextBox Margin="0,0,0,20" Text="{Binding ProsAndConsItemText, Mode=TwoWay}"/>
                     <controls:ToggleSwitch Content="{Binding EvaluationValueText}" IsChecked="{Binding IsProsItem, Mode=TwoWay}"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <RadioButton Content="{Binding Path=LocalizedResources.BigItemText, Source={StaticResource LocalizedStrings}}" 
